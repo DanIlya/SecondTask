@@ -117,43 +117,52 @@ void find (list_element* a,char fam[20])
     }
     if (k>1)
     {
-        printf("Attention! You have a couple of people with same surnames!");
+        printf("Attention! You have a couple of people with same surnames!\n");
     }
 }
 
 int main()
 {
 
-    char enter[30];
+    char enter[10];
     char fam[20];
     char tel[10];
+    int i = 0;
+    int j = 0;
+
     list_element* r = create_list_element("0","0");
-    printf("INSERT - insert new name\nFIND - find some\nExit (or End) to exit program\n");
-    scanf("%s",enter);
-    while (enter[0] != 'E')
+    printf("INSERT - insert new name\nFIND - find some\n");
+
+    //scanf("%s",enter);
+    for (i = 0; (enter[i] = getchar()) != '\n' && enter[i] != '\0' && enter[i] != ' '; i++);
+    enter[i] = '\0';
+
+    while (enter[0] != '\0')
     {
+
+        j++;
 
         if (enter[0] == 'I')
         {
-
-            printf("You want to insert\n");
             scanf("%s",fam);
             scanf("%s",tel);
             ins(r, fam, tel);
         }
         else if (enter[0] == 'F')
         {
-            printf("You want to find\n");
             scanf("%s",fam);
             find(r, fam);
         }
         else
         {
-            printf("What?! Repeat, please.\n");
+            printf("Something went wrong in %d string",j);
         }
-        scanf("%s",enter);
+        //scanf("%s",enter);
+        getchar();
+        for (i = 0; (enter[i] = getchar()) != '\n' && enter[i] != '\0' && enter[i] != ' '; i++);
+        enter[i] = '\0';
+
     }
-    printf("Exit");
 
     FreeAll(r);
     return 0;
